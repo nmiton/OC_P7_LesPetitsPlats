@@ -1,0 +1,175 @@
+body{
+    padding: 0 100px;
+
+    header{
+        text-align: center;
+        margin-top: 42px;
+        display: flex;
+        flex-direction: column;
+
+        img{
+            width: 50px;
+            height: 46px;
+            margin: 0 auto;
+        }
+
+        h1{
+            font-weight: 700;
+            font-family: DM Sans;
+            font-size: 36px;
+            line-height: 47px;
+            color: #D04F4F;
+            text-align: center;
+        }
+    }
+
+    main{
+        font-family: Lato;
+        form{
+            width: 100%;
+            margin-top: 17px;
+            background-color: #E7E7E7;
+            display: flex;
+            justify-content: space-between;
+
+            input{
+                border: 5px;
+                background-color: #E7E7E7;
+                padding: 24px;
+                width: 95%;
+            }
+
+            button{
+                border: none;
+                margin: auto;
+
+                i{
+                    width: 100%;
+                    height: 100%;
+                    scale: 2;
+                }
+            }
+        }
+
+        .active-filters{
+            color: white;
+            max-width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-top: 25px;
+            margin-bottom: 15px;
+
+            .filter-item{
+                width: fit-content;
+                border-radius : 5px;
+                padding: 10px 20px;
+
+                i{
+                    margin: auto 0;
+                    margin-left: 12px;
+                    cursor: pointer;
+                }
+            }
+
+            .ingredients{
+                background-color: #3282F7;
+            }
+            .appliance{
+                background-color: #68D9A4;
+            }
+            .ustensils{
+                background-color: #ED6454;
+            }
+        }
+    
+        .filters{
+            margin-top: 20px;
+    
+            select{
+                border: none;
+                color: white;
+                padding: 23px 0;
+                padding-left: 15px;
+                border-radius: 5px;
+            }
+            #ingredients{
+                background-color: #3282F7;
+            }
+            #appliance{
+                background-color: #68D9A4;
+            }
+            #ustensils{
+                background-color: #ED6454;
+            }
+        }
+    
+    
+        #recipes-list{
+            padding-top: 25px;
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            gap: 50px;
+        
+            figure{
+                background-color: #E7E7E7;
+                border-radius: 5px;
+        
+                .img-recipe{
+                    border-radius: 5px 5px 0 0 ;
+                    width: 100%;
+                    height: 180px;
+                    background-color: #C7BEBE;
+                }
+        
+                .top-recipe{
+                    padding: 20px 20px 0 20px;
+                    display: flex;
+                    justify-content: space-between;
+        
+                    .name-recipe{
+                        font-size: 18px;
+                    }
+        
+                    .time-wrapper{
+                        font-weight: 700;
+                        white-space: nowrap;
+                        display: flex;
+                        margin: auto 0;
+                        font-size: 18px;
+                        
+                        i{
+                            margin-right: 7px;
+                        }
+                    }
+                }
+        
+                .bottom-recipe{
+                    padding: 20px 20px 20px;
+                    display: grid;
+                    grid-template-columns: repeat(2,1fr);
+                    gap: 5px;
+                    ul{
+                        list-style: none;
+                        margin: 0;
+                        padding: 0;
+                        font-size: 12px;
+                        line-height: 14.4px;
+
+                        .ingredient{
+                            white-space: nowrap;
+                            .ingredient-name{
+                                font-weight: 700;
+                            }
+                        }
+                    }
+        
+                    .description{
+                        line-height: 12px;
+                        font-size: 12px;
+                    }
+                }
+            }
+        }
+    }
+}
