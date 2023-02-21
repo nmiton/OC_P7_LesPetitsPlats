@@ -9,6 +9,7 @@ function dropdownFactory(type) {
         input.setAttribute("class","input-dropdown")
         input.setAttribute("id","input-dropdown-" + type)
         input.setAttribute("type","button")
+        input.setAttribute("aria-label","input-"+type)
 
         switch (type) {
             case "ingredients":
@@ -32,10 +33,13 @@ function dropdownFactory(type) {
 
         const label = document.createElement('label');
         label.setAttribute("class","label-dropdown")
+        label.setAttribute("id","label-dropdown-"+type)
+        label.setAttribute("aria-label","label-"+type)
 
         const arrowDown = document.createElement('i')
         arrowDown.setAttribute('id','arrow-'+type)
         arrowDown.setAttribute('class','fa-solid fa-angle-down')
+        arrowDown.setAttribute("aria-label","arrow-"+type)
 
         label.appendChild(arrowDown)
 

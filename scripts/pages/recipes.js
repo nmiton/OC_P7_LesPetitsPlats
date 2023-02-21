@@ -1,3 +1,4 @@
+// function to display receipes
 async function displayData(recipes) {
     const recipesSection = document.getElementById('recipes-list')
 
@@ -7,7 +8,7 @@ async function displayData(recipes) {
         recipesSection.appendChild(recipeCardDOM);
     });
 };
-
+// function to display dropdowns 
 function displayDropdown(){
     const filtersSection = document.getElementById('filters')
 
@@ -19,7 +20,7 @@ function displayDropdown(){
         filtersSection.appendChild(dropdownCardDom)
     })
 }
-
+//function to add all ingredients to dropdown
 function findAllIngredients(recipes){
     const ingredientsList = []
     const menuList = document.getElementById('dropdown-menu-list-ingredients')
@@ -37,7 +38,7 @@ function findAllIngredients(recipes){
         });
     });
 }
-
+//function to add all appliances to dropdown
 function findAllAppliances(recipes){
     const appliancesList = []
     const menuList = document.getElementById('dropdown-menu-list-appliance')
@@ -52,7 +53,7 @@ function findAllAppliances(recipes){
         }
     });
 }
-
+//function to add all ustensils to dropdown
 function findAllUstensils(recipes){
     const ustensilsList = []
     const menuList = document.getElementById('dropdown-menu-list-ustensils')
@@ -91,7 +92,7 @@ function addFilter(e){
         element.addEventListener('click', deleteFilter)
     }
 }
-
+//function to delete filter
 function deleteFilter(e){
     filter = document.getElementById(e.target.parentNode.id)
     sectionActiveFilters.removeChild(filter)
@@ -99,9 +100,8 @@ function deleteFilter(e){
     const filterRemoved = e.target.parentNode
     const filterName = filterRemoved.getAttribute("id")
     const filterType = filterRemoved.getAttribute('class').split(" ")[0]
-
     const menuList = document.getElementById('dropdown-menu-list-'+filterType)
-
+    //display the removed filter
     for (let index = 0; index < menuList.children.length; index++) {
         const element = menuList.children[index];
         if(element.innerHTML == filterName){
@@ -109,7 +109,7 @@ function deleteFilter(e){
         }
     }
 }
-
+// function to udpate dropdown with input dropdown value
 function updateDropdown(e){
     if(e.target.value.length===0){
         return
@@ -136,7 +136,7 @@ function updateDropdown(e){
         updateList(newListItems,dropDownType)
     }
 }
-
+//function to update list items of dropdown
 function updateList(newListItems,dropDownType){
     const menuList = document.getElementById('dropdown-menu-list-'+dropDownType)
     menuList.innerHTML = ""
@@ -163,35 +163,41 @@ init();
 const inputDropdownIngredient = document.getElementById("input-dropdown-ingredients")
 const inputDropdownUstensils = document.getElementById("input-dropdown-ustensils")
 const inputDropdownAppliance = document.getElementById('input-dropdown-appliance')
+
+const dropdownIngredient = document.getElementById("dropdown-ingredients")
+const dropdownUstensils = document.getElementById("dropdown-ustensils")
+const dropdownAppliance = document.getElementById("dropdown-appliance")
+
 const sectionActiveFilters = document.getElementById('active-filters')
-
-inputDropdownIngredient.addEventListener("click",changeDropdown)
-inputDropdownUstensils.addEventListener("click",changeDropdown)
-inputDropdownAppliance.addEventListener("click",changeDropdown)
-
+//add event listener on click on button to display dropdown
+dropdownIngredient.addEventListener("click",changeDropdown)
+dropdownUstensils.addEventListener("click",changeDropdown)
+dropdownAppliance.addEventListener("click",changeDropdown)
+//add event listener on keyup for udpate items list
 inputDropdownIngredient.addEventListener("keyup",updateDropdown)
 inputDropdownUstensils.addEventListener("keyup",updateDropdown)
 inputDropdownAppliance.addEventListener("keyup",updateDropdown)
-
+//add event listener on keydown for udpate items list
 inputDropdownIngredient.addEventListener("keydown",updateDropdown)
 inputDropdownUstensils.addEventListener("keydown",updateDropdown)
 inputDropdownAppliance.addEventListener("keydown",updateDropdown)
-
+//add event listener on focusout for update dropdown with all items
+inputDropdownIngredient.addEventListener("focusout",findAllIngredients)
+inputDropdownUstensils.addEventListener("focusout",findAllAppliances)
+inputDropdownAppliance.addEventListener("focusout",findAllUstensils)
+//add event listener on click on item
 const itemsMenu = document.getElementsByClassName("list-item")
 for (let index = 0; index < itemsMenu.length; index++) {
     const element = itemsMenu[index];
     element.addEventListener("click",addFilter)
 }
-
-const arrowsList = document.getElementsByClassName("fa-angle-down")
-for (let index = 0; index < arrowsList.length; index++) {
-    const element = arrowsList[index];
-    // element.addEventListener("click",changeDropdown(element))
-}
-
+//function on click on dropdown for display list
 function changeDropdown(e){
     const targetClick = e.target
-    const dropdown = targetClick.parentNode
+    const ariaLabel = targetClick.getAttribute('aria-label')
+    console.log(ariaLabel)
+    const typeDropdown = ariaLabel.split('-')[1]
+    const dropdown = document.getElementById("dropdown-"+typeDropdown)
     const input = dropdown.children[0]
     const arrow = dropdown.children[1].children[0]
     const menu = dropdown.children[2]
@@ -200,12 +206,11 @@ function changeDropdown(e){
         input.setAttribute('value',"")
         input.setAttribute('type','text')
         //display menu
-        menu.setAttribute('class',"dropdown-menu d-flex")
+        menu.setAttribute('class',"dropdown-menu d-flex menu-active")
         //set class for dropdown
         dropdown.setAttribute('class','dropdown dropdown-active')
         //change direction arrow 
         arrow.setAttribute('class', "fa-solid fa-angle-down rotate")
-
     }else{
         //change attribute of input
         input.setAttribute('type','button')
