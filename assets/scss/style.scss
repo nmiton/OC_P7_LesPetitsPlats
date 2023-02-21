@@ -1,6 +1,10 @@
 body{
     padding: 0 100px;
 
+    .d-none{
+        display: none;
+    }
+
     header{
         text-align: center;
         margin-top: 42px;
@@ -25,21 +29,27 @@ body{
 
     main{
         font-family: Lato;
+
         form{
             width: 100%;
             margin-top: 17px;
+            margin-bottom: 20px;
             background-color: #E7E7E7;
             display: flex;
+            position: relative;
             justify-content: space-between;
 
             input{
                 border: 5px;
                 background-color: #E7E7E7;
                 padding: 24px;
-                width: 95%;
+                width: 100%;
             }
 
             button{
+                position: absolute;
+                right: 20px;
+                top : 25px;
                 border: none;
                 margin: auto;
 
@@ -57,21 +67,20 @@ body{
             display: flex;
             flex-wrap: wrap;
             gap: 5px;
-            margin-top: 25px;
             margin-bottom: 15px;
-
+        
             .filter-item{
                 width: fit-content;
                 border-radius : 5px;
                 padding: 10px 20px;
-
+        
                 i{
                     margin: auto 0;
                     margin-left: 12px;
                     cursor: pointer;
                 }
             }
-
+        
             .ingredients{
                 background-color: #3282F7;
             }
@@ -82,29 +91,128 @@ body{
                 background-color: #ED6454;
             }
         }
-    
+
         .filters{
-            margin-top: 20px;
-    
-            select{
-                border: none;
+            // margin-top: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        
+            .dropdown{
                 color: white;
-                padding: 23px 0;
-                padding-left: 15px;
+                position: relative;
+                transition: width 350ms ease-out;
+                display: flex;
+                height: fit-content;
+                border: none;
+                height: 70px;
+                width: 170px;
+                max-height: 400px;
                 border-radius: 5px;
+
+                input{
+                    color : white;
+                    padding: 23px;
+                    width: 90%;
+                    height: 70px;
+                    font-weight: 700;
+                    text-align: left;
+                    border: none;
+                    border-radius: 5px;
+        
+                    &:focus{
+                        outline: none;
+                    }
+                }
+        
+                button{
+                    color: white;
+                    padding : 23px;
+                    border: none;
+                    border-radius: 5px;
+                }
+        
+                label{
+                    position: relative;
+                    transition: rotate 150ms ease-out;
+                    color: white;
+                    width: 10%;
+
+                    i{
+                        scale: 1.5;
+                        position: absolute;
+                        right: 18px;
+                        top: 29px;
+                        transition: rotate 150ms ease-out;
+                    }
+
+                    .rotate{
+                        rotate: 180deg;
+                    }
+                }
+                
+                .dropdown-menu{
+                    position: absolute;
+                    top: 70px;
+                    width: 670px;
+                    border-radius: 0 0 5px 5px;
+
+                    ul{
+                        display: grid;
+                        grid-template-columns: repeat(3, 1fr);
+                        width: 100%;
+                        height: auto;
+                        
+                        max-height: 400px;
+                        transition: height 450ms ease-out;
+                        margin-top: -5px; 
+                        z-index: 1;
+
+                        overflow-y: auto;
+
+                        li{
+                            font-size: 14px;
+                            padding: 10px 20px;
+                            margin: 5px;
+                            display: flex;
+                            justify-content: flex-start;
+                            align-items: center;
+                        }
+                    }
+                }
             }
-            #ingredients{
+                                
+            .dropdown-active{
+                width: 670px !important;
+                border-radius: 5px 5px 0 0;
+
+                input{
+                    border-radius: 5px 5px 0 0;
+                }
+            }
+        }
+        
+        #dropdown-ingredients{
+            background-color: #3282F7;
+            .dropdown-menu,button,input{
                 background-color: #3282F7;
             }
-            #appliance{
+        }
+        #dropdown-appliance{
+            background-color: #68D9A4;
+        
+            .dropdown-menu,button,input{
                 background-color: #68D9A4;
             }
-            #ustensils{
+        }
+        #dropdown-ustensils{
+            background-color: #ED6454;
+        
+            .dropdown-menu,button,input{
                 background-color: #ED6454;
             }
         }
-    
-    
+
         #recipes-list{
             padding-top: 25px;
             display: grid;
@@ -155,7 +263,7 @@ body{
                         padding: 0;
                         font-size: 12px;
                         line-height: 14.4px;
-
+        
                         .ingredient{
                             white-space: nowrap;
                             .ingredient-name{
@@ -173,3 +281,4 @@ body{
         }
     }
 }
+

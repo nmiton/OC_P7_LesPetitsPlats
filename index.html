@@ -4,11 +4,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Les petits plats</title>
+    <link rel="icon" type="image/png" href="./assets/img/logo.png" />
     <script src="https://kit.fontawesome.com/597ff06523.js" crossorigin="anonymous" defer></script> 
     <link rel="stylesheet" href="./assets/css/reset.css">
     <link rel="stylesheet" href="./assets/css/style.min.css">
     <script type="text/javascript" src="./data/recipes.js" defer></script>
     <script type="text/javascript" src="./scripts/factories/recipes.js" defer></script>
+    <script type="text/javascript" src="./scripts/factories/dropdown.js" defer></script>
     <script type="text/javascript" src="./scripts/factories/filters.js" defer></script>
     <script type="text/javascript" src="./scripts/pages/recipes.js" defer></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" defer></script>
@@ -32,18 +34,9 @@
         <section class="active-filters" id="active-filters">
 
         </section>
-        <section class="filters">
-            <select class="form-select" aria-label="Choisir un ingrédient" id="ingredients" name="ingredients">
-                <option selected>Ingrédients</option>
-            </select>
-            <select class="form-select" aria-label="Choisir un appareil" id="appliance" name="appliance">
-                <option selected>Appareils</option>
-            </select>
-            <select class="form-select" aria-label="Choisir un ustensile" id="ustensils" name="ustensils">
-                <option selected>Ustensiles</option>
-            </select>
-        </section>
+        <section class="filters" id='filters'>
 
+        </section>
         <section id="recipes-list">
 
         </section>
