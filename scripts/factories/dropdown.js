@@ -19,7 +19,7 @@ function dropdownFactory(type) {
                 break;
             case "ustensils":
                 input.setAttribute("placeholder","Rechercher un ustensil")
-                input.setAttribute("value","Ustensils")
+                input.setAttribute("value","Ustensiles")
                 input.setAttribute("name","Ustensils")
                 break;
             case "appliance":

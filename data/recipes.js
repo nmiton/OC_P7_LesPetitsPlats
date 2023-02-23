@@ -220,7 +220,8 @@ const recipes = [
         "description": "Commencez par mélanger les oeufs le sucre et le sucre vanillé dans un saladier, découper les pommes en tranches, ajouter la crème fraîche aux oeufs. Une fois que tout est pret, étalez la tarte dans le moule. N'oubliez pas de piquer le fond avec une fourchette avant de positionner les pommes sur la tarte. Finalement verser la préparation à base d'oeufs et de crème fraîche. Laisser cuire au four pendant 30 minutes",
         "appliance": "Four",
         "ustensils": ["moule à tarte", "saladier", "fourchette"]
-    },{
+    },
+    {
         "id": 7,
         "name": "Tartelettes au chocolat et aux fraises",
         "servings": 6,

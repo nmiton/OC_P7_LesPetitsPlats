@@ -93,9 +93,7 @@ body{
         }
 
         .filters{
-            // margin-top: 15px;
             display: flex;
-            flex-wrap: wrap;
             gap: 20px;
         
             .dropdown{
@@ -177,6 +175,7 @@ body{
                             display: flex;
                             justify-content: flex-start;
                             align-items: center;
+                            cursor : pointer;
                         }
                     }
                 }
