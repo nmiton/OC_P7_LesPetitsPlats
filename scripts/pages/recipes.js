@@ -111,8 +111,6 @@ function updateDropdown(e){
         return
     }else{
         const dropDownType = e.target.parentNode.getAttribute('id').split("-")[1]
-        const list = e.target.parentNode.children[2].children[0]
-        const items = list.children
         let listItems = []
         switch(dropDownType){
             case "ingredients":
