@@ -11,11 +11,18 @@ async function displayRecipes(listRecipes) {
     updateList(listAppliance,'appliance')
     updateList(listUstensils,'ustensils')
 
-    listRecipes.forEach((recipe) => {
-        const recipeModel = recipeFactory(recipe);
-        const recipeCardDOM = recipeModel.getRecipeCardDOM();
-        recipesSection.appendChild(recipeCardDOM);
-    });
+    if(listRecipes.length>0){
+        listRecipes.forEach((recipe) => {
+            const recipeModel = recipeFactory(recipe);
+            const recipeCardDOM = recipeModel.getRecipeCardDOM();
+            recipesSection.appendChild(recipeCardDOM);
+        });
+    }else{
+        const div_none_recipe = document.createElement("div")
+        div_none_recipe.setAttribute("class",'none-recipe')
+        div_none_recipe.innerText = "Aucune recette ne correspond à votre critère..."
+        recipesSection.appendChild(div_none_recipe);
+    }
 };
 // function to display dropdowns 
 function displayDropdown(){
@@ -140,6 +147,7 @@ function updateDropdown(e){
 function updateRecipes(){
     const activeFilters = document.getElementById('active-filters')
     const activeFiltersItems = activeFilters.children
+    const valueInputSearch = inputSearchProduct.value.trim()
 
     let listTagIngredients = []
     let listTagAppliance = []
@@ -167,10 +175,10 @@ function updateRecipes(){
         const ingredientsRecipe = recipe.ingredients.map((ingredient)=>ingredient.ingredient)
         const applianceRecipe = recipe.appliance
         const ustensilsRecipe = recipe.ustensils
+
         let tagsApplicanceIsInRecipe = true
         let tagsIngredientsIsInRecipe = true
         let tagsUstensilsIsInRecipe = true
-
 
         if(listTagIngredients.length>0){
             // listTagIngredients.forEach(tagIngredient => {
@@ -199,6 +207,10 @@ function updateRecipes(){
             newListRecipes.push(recipe)
         }
     });
+
+    if(valueInputSearch.length>2){
+        newListRecipes = findRecipeWithInput(newListRecipes)
+    }
     displayRecipes(newListRecipes)
 }
 //function to update list items of dropdown
@@ -216,13 +228,58 @@ function updateList(newListItems,dropDownType){
     });
 }
 
+// function to find recipes that match with input value
+function findRecipeWithInput(recipeList) {
+    const valueInputSearch = inputSearchProduct.value.trim()
+    let newListRecipesWithInput = []
+
+    recipeList.forEach(newRecipe => {
+        const ingredientsRecipe = newRecipe.ingredients.map((ingredient)=>ingredient.ingredient)
+        const applianceRecipe = newRecipe.appliance
+        const ustensilsRecipe = newRecipe.ustensils
+
+        let valueInputIsInRecipe = false
+        const nameRecipe = newRecipe.name
+
+        ingredientsRecipe.forEach(ingredient => {
+            const indexIngredient = ingredient.toLowerCase().indexOf(valueInputSearch.toLowerCase())
+            if(indexIngredient > -1){
+                valueInputIsInRecipe = true
+            }
+        });
+        ustensilsRecipe.forEach(ustensil => {
+            const indexUstensil = ustensil.toLowerCase().indexOf(valueInputSearch.toLowerCase())
+            if(indexUstensil > -1){
+                valueInputIsInRecipe = true
+            }
+        });
+        const indexAppliance = applianceRecipe.toLowerCase().indexOf(valueInputSearch.toLowerCase())
+        if(indexAppliance > -1){
+            valueInputIsInRecipe = true
+        }
+
+        const indexRecipeName = nameRecipe.toLowerCase().indexOf(valueInputSearch.toLowerCase())
+
+        if(indexRecipeName > -1){
+            valueInputIsInRecipe = true
+        }
+
+        if(valueInputIsInRecipe){
+            newListRecipesWithInput.push(newRecipe)
+        }
+    })
+    
+    return newListRecipesWithInput
+}
+
 async function init() {
     displayDropdown()
     displayRecipes(recipes)
 };
 
 init();
-    
+
+const inputSearchProduct = document.getElementById("search-product")
 const inputDropdownIngredient = document.getElementById("input-dropdown-ingredients")
 const inputDropdownUstensils = document.getElementById("input-dropdown-ustensils")
 const inputDropdownAppliance = document.getElementById('input-dropdown-appliance')
@@ -237,11 +294,12 @@ dropdownIngredient.addEventListener("click",changeDropdown)
 dropdownUstensils.addEventListener("click",changeDropdown)
 dropdownAppliance.addEventListener("click",changeDropdown)
 //add event listener on keyup for udpate items list
+inputSearchProduct.addEventListener("keyup",updateRecipes)
 inputDropdownIngredient.addEventListener("keyup",updateDropdown)
 inputDropdownUstensils.addEventListener("keyup",updateDropdown)
 inputDropdownAppliance.addEventListener("keyup",updateDropdown)
 //add event listener on keydown for udpate items list
-inputDropdownIngredient.addEventListener("keydown",updateDropdown)
+inputSearchProduct.addEventListener("keydown",updateRecipes)
 inputDropdownUstensils.addEventListener("keydown",updateDropdown)
 inputDropdownAppliance.addEventListener("keydown",updateDropdown)
 //add event listener on click on item
