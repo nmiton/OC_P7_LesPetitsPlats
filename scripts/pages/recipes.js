@@ -230,26 +230,28 @@ function findRecipeWithInput(recipeList) {
     const valueInputSearch = inputSearchProduct.value.trim()
     let newListRecipesWithInput = []
 
-    recipeList.forEach(newRecipe => {
-        const ingredientsRecipe = newRecipe.ingredients.map((ingredient)=>ingredient.ingredient);
-        const applianceRecipe = newRecipe.appliance;
-        const ustensilsRecipe = newRecipe.ustensils;
+    for (let index = 0; index < recipeList.length; index++) {
+        const element = recipeList[index];
+        const ingredientsRecipe = element.ingredients.map((ingredient)=>ingredient.ingredient);
+        const applianceRecipe = element.appliance;
+        const ustensilsRecipe = element.ustensils;
 
         let valueInputIsInRecipe = false;
-        const nameRecipe = newRecipe.name;
-
-        ingredientsRecipe.forEach(ingredient => {
-            const indexIngredient = ingredient.toLowerCase().indexOf(valueInputSearch.toLowerCase());
+        const nameRecipe = element.name;
+        for (let index = 0; index < ingredientsRecipe.length; index++) {
+            const element = ingredientsRecipe[index];
+            const indexIngredient = element.toLowerCase().indexOf(valueInputSearch.toLowerCase());
             if(indexIngredient > -1){
                 valueInputIsInRecipe = true;
             }
-        });
-        ustensilsRecipe.forEach(ustensil => {
-            const indexUstensil = ustensil.toLowerCase().indexOf(valueInputSearch.toLowerCase());
+        }
+        for (let index = 0; index < ustensilsRecipe.length; index++) {
+            const element = ustensilsRecipe[index];
+            const indexUstensil = element.toLowerCase().indexOf(valueInputSearch.toLowerCase());
             if(indexUstensil > -1){
                 valueInputIsInRecipe = true;
             }
-        });
+        }
         const indexAppliance = applianceRecipe.toLowerCase().indexOf(valueInputSearch.toLowerCase());
         if(indexAppliance > -1){
             valueInputIsInRecipe = true;
@@ -262,9 +264,9 @@ function findRecipeWithInput(recipeList) {
         }
 
         if(valueInputIsInRecipe){
-            newListRecipesWithInput.push(newRecipe);
+            newListRecipesWithInput.push(element);
         }
-    });
+    }
     
     return newListRecipesWithInput
 }
