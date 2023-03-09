@@ -114,34 +114,31 @@ function deleteFilter(e){
 }
 // function to udpate dropdown with input dropdown value
 function updateDropdown(e){
-    if(e.target.value.length===0){
-        return
-    }else{
-        const dropDownType = e.target.parentNode.getAttribute('id').split("-")[1]
-        let listItems = []
-        switch(dropDownType){
-            case "ingredients":
-                listItems = getAllIngredients(recipes)
-                break;
-            case "ustensils":
-                listItems = getAllUstensils(recipes)
-                break;
-            case "appliance":
-                listItems = getAllAppliances(recipes)
-                break;
-        }
-        const newListItems = []
-        const valueInput = e.target.value
-        //push items match with input in new Array
-        listItems.forEach(element => {
-            const index = element.toLowerCase().indexOf(valueInput.toLowerCase())
-            if(index > -1){
-                newListItems.push(element)
-            }
-        });
-        
-        updateList(newListItems,dropDownType)
+    const dropdown = e.target.closest('.dropdown')
+    const dropDownType = dropdown.getAttribute('id').split("-")[1]
+    let listItems = []
+    switch(dropDownType){
+        case "ingredients":
+            listItems = getAllIngredients(recipes)
+            break;
+        case "ustensils":
+            listItems = getAllUstensils(recipes)
+            break;
+        case "appliance":
+            listItems = getAllAppliances(recipes)
+            break;
     }
+    const newListItems = []
+    const valueInput = document.getElementById("input-dropdown-"+dropDownType).value
+    //push items match with input in new Array
+    listItems.forEach(element => {
+        const index = element.toLowerCase().indexOf(valueInput.toLowerCase())
+        if(index > -1){
+            newListItems.push(element)
+        }
+    });
+    updateList(newListItems,dropDownType)
+    
 }
 //function to update recipes
 function updateRecipes(){
@@ -215,6 +212,7 @@ function updateRecipes(){
 }
 //function to update list items of dropdown
 function updateList(newListItems,dropDownType){
+    console.log(dropDownType)
     const menuList = document.getElementById('dropdown-menu-list-'+dropDownType)
     menuList.innerHTML = ""
 
@@ -227,47 +225,46 @@ function updateList(newListItems,dropDownType){
         menuList.appendChild(item)
     });
 }
-
 // function to find recipes that match with input value
 function findRecipeWithInput(recipeList) {
     const valueInputSearch = inputSearchProduct.value.trim()
     let newListRecipesWithInput = []
 
     recipeList.forEach(newRecipe => {
-        const ingredientsRecipe = newRecipe.ingredients.map((ingredient)=>ingredient.ingredient)
-        const applianceRecipe = newRecipe.appliance
-        const ustensilsRecipe = newRecipe.ustensils
+        const ingredientsRecipe = newRecipe.ingredients.map((ingredient)=>ingredient.ingredient);
+        const applianceRecipe = newRecipe.appliance;
+        const ustensilsRecipe = newRecipe.ustensils;
 
-        let valueInputIsInRecipe = false
-        const nameRecipe = newRecipe.name
+        let valueInputIsInRecipe = false;
+        const nameRecipe = newRecipe.name;
 
         ingredientsRecipe.forEach(ingredient => {
-            const indexIngredient = ingredient.toLowerCase().indexOf(valueInputSearch.toLowerCase())
+            const indexIngredient = ingredient.toLowerCase().indexOf(valueInputSearch.toLowerCase());
             if(indexIngredient > -1){
-                valueInputIsInRecipe = true
+                valueInputIsInRecipe = true;
             }
         });
         ustensilsRecipe.forEach(ustensil => {
-            const indexUstensil = ustensil.toLowerCase().indexOf(valueInputSearch.toLowerCase())
+            const indexUstensil = ustensil.toLowerCase().indexOf(valueInputSearch.toLowerCase());
             if(indexUstensil > -1){
-                valueInputIsInRecipe = true
+                valueInputIsInRecipe = true;
             }
         });
-        const indexAppliance = applianceRecipe.toLowerCase().indexOf(valueInputSearch.toLowerCase())
+        const indexAppliance = applianceRecipe.toLowerCase().indexOf(valueInputSearch.toLowerCase());
         if(indexAppliance > -1){
-            valueInputIsInRecipe = true
+            valueInputIsInRecipe = true;
         }
 
-        const indexRecipeName = nameRecipe.toLowerCase().indexOf(valueInputSearch.toLowerCase())
+        const indexRecipeName = nameRecipe.toLowerCase().indexOf(valueInputSearch.toLowerCase());
 
         if(indexRecipeName > -1){
-            valueInputIsInRecipe = true
+            valueInputIsInRecipe = true;
         }
 
         if(valueInputIsInRecipe){
-            newListRecipesWithInput.push(newRecipe)
+            newListRecipesWithInput.push(newRecipe);
         }
-    })
+    });
     
     return newListRecipesWithInput
 }
@@ -293,6 +290,10 @@ const sectionActiveFilters = document.getElementById('active-filters')
 dropdownIngredient.addEventListener("click",changeDropdown)
 dropdownUstensils.addEventListener("click",changeDropdown)
 dropdownAppliance.addEventListener("click",changeDropdown)
+//add event listener on click on button to reset dropdown
+dropdownIngredient.addEventListener("click",updateDropdown)
+dropdownUstensils.addEventListener("click",updateDropdown)
+dropdownAppliance.addEventListener("click",updateDropdown)
 //add event listener on keyup for udpate items list
 inputSearchProduct.addEventListener("keyup",updateRecipes)
 inputDropdownIngredient.addEventListener("keyup",updateDropdown)
@@ -300,6 +301,7 @@ inputDropdownUstensils.addEventListener("keyup",updateDropdown)
 inputDropdownAppliance.addEventListener("keyup",updateDropdown)
 //add event listener on keydown for udpate items list
 inputSearchProduct.addEventListener("keydown",updateRecipes)
+inputDropdownIngredient.addEventListener("keydown",updateDropdown)
 inputDropdownUstensils.addEventListener("keydown",updateDropdown)
 inputDropdownAppliance.addEventListener("keydown",updateDropdown)
 //add event listener on click on item
