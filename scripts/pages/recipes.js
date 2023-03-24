@@ -227,12 +227,20 @@ function findRecipeWithInput(recipeList) {
 
     recipeList.forEach(newRecipe => {
         const ingredientsRecipe = newRecipe.ingredients.map((ingredient)=>ingredient.ingredient);
-        const applianceRecipe = newRecipe.appliance;
-        const ustensilsRecipe = newRecipe.ustensils;
 
         let valueInputIsInRecipe = false;
         const nameRecipe = newRecipe.name;
         const descriptionRecipe = newRecipe.name;
+
+        const indexRecipeName = nameRecipe.toLowerCase().indexOf(valueInputSearch.toLowerCase());
+        if(indexRecipeName > -1){
+            valueInputIsInRecipe = true;
+        }
+
+        const indexDescriptionRecipe = descriptionRecipe.toLowerCase().indexOf(valueInputSearch.toLowerCase());
+        if(indexDescriptionRecipe > -1){
+            valueInputIsInRecipe = true;
+        }
 
         ingredientsRecipe.forEach(ingredient => {
             const indexIngredient = ingredient.toLowerCase().indexOf(valueInputSearch.toLowerCase());
@@ -240,27 +248,6 @@ function findRecipeWithInput(recipeList) {
                 valueInputIsInRecipe = true;
             }
         });
-
-        // ustensilsRecipe.forEach(ustensil => {
-        //     const indexUstensil = ustensil.toLowerCase().indexOf(valueInputSearch.toLowerCase());
-        //     if(indexUstensil > -1){
-        //         valueInputIsInRecipe = true;
-        //     }
-        // });
-        // const indexAppliance = applianceRecipe.toLowerCase().indexOf(valueInputSearch.toLowerCase());
-        // if(indexAppliance > -1){
-        //     valueInputIsInRecipe = true;
-        // }
-
-        const indexDescriptionRecipe = descriptionRecipe.toLowerCase().indexOf(valueInputSearch.toLowerCase());
-        if(indexDescriptionRecipe > -1){
-            valueInputIsInRecipe = true;
-        }
-
-        const indexRecipeName = nameRecipe.toLowerCase().indexOf(valueInputSearch.toLowerCase());
-        if(indexRecipeName > -1){
-            valueInputIsInRecipe = true;
-        }
 
         if(valueInputIsInRecipe){
             newListRecipesWithInput.push(newRecipe);
