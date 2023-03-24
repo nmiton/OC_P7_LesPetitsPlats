@@ -178,11 +178,6 @@ function updateRecipes(){
         let tagsUstensilsIsInRecipe = true
 
         if(listTagIngredients.length>0){
-            // listTagIngredients.forEach(tagIngredient => {
-            //     if(!ingredientsRecipe.includes(tagIngredient)){
-            //         tagsIsInRecipe = false
-            //     }
-            // });
             tagsIngredientsIsInRecipe = listTagIngredients.every((tagIngredient)=>{
                 return ingredientsRecipe.includes(tagIngredient)
             })
