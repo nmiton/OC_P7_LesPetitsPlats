@@ -212,7 +212,7 @@ function updateRecipes(){
 }
 //function to update list items of dropdown
 function updateList(newListItems,dropDownType){
-    console.log(dropDownType)
+    // console.log(dropDownType)
     const menuList = document.getElementById('dropdown-menu-list-'+dropDownType)
     menuList.innerHTML = ""
 
@@ -237,6 +237,8 @@ function findRecipeWithInput(recipeList) {
 
         let valueInputIsInRecipe = false;
         const nameRecipe = newRecipe.name;
+        const descriptionRecipe = newRecipe.name;
+
 
         ingredientsRecipe.forEach(ingredient => {
             const indexIngredient = ingredient.toLowerCase().indexOf(valueInputSearch.toLowerCase());
@@ -255,8 +257,12 @@ function findRecipeWithInput(recipeList) {
             valueInputIsInRecipe = true;
         }
 
-        const indexRecipeName = nameRecipe.toLowerCase().indexOf(valueInputSearch.toLowerCase());
+        const indexDescriptionRecipe = descriptionRecipe.toLowerCase().indexOf(valueInputSearch.toLowerCase());
+        if(indexDescriptionRecipe > -1){
+            valueInputIsInRecipe = true;
+        }
 
+        const indexRecipeName = nameRecipe.toLowerCase().indexOf(valueInputSearch.toLowerCase());
         if(indexRecipeName > -1){
             valueInputIsInRecipe = true;
         }
