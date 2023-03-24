@@ -235,22 +235,24 @@ function findRecipeWithInput(recipeList) {
         const indexRecipeName = nameRecipe.toLowerCase().indexOf(valueInputSearch.toLowerCase());
         if(indexRecipeName > -1){
             valueInputIsInRecipe = true;
-        }
-
-        const indexDescriptionRecipe = descriptionRecipe.toLowerCase().indexOf(valueInputSearch.toLowerCase());
-        if(indexDescriptionRecipe > -1){
-            valueInputIsInRecipe = true;
-        }
-
-        ingredientsRecipe.forEach(ingredient => {
-            const indexIngredient = ingredient.toLowerCase().indexOf(valueInputSearch.toLowerCase());
-            if(indexIngredient > -1){
-                valueInputIsInRecipe = true;
-            }
-        });
-
-        if(valueInputIsInRecipe){
             newListRecipesWithInput.push(newRecipe);
+        }
+
+        if(!valueInputIsInRecipe){
+            const indexDescriptionRecipe = descriptionRecipe.toLowerCase().indexOf(valueInputSearch.toLowerCase());
+            if(indexDescriptionRecipe > -1){
+                valueInputIsInRecipe = true;
+                newListRecipesWithInput.push(newRecipe);
+            }
+        }
+        if(!valueInputIsInRecipe){
+            ingredientsRecipe.forEach(ingredient => {
+                const indexIngredient = ingredient.toLowerCase().indexOf(valueInputSearch.toLowerCase());
+                if(indexIngredient > -1){
+                    valueInputIsInRecipe = true;
+                    newListRecipesWithInput.push(newRecipe);
+                }
+            });
         }
     });
     
