@@ -234,23 +234,23 @@ function findRecipeWithInput(recipeList) {
         const nameRecipe = newRecipe.name;
         const descriptionRecipe = newRecipe.name;
 
-
         ingredientsRecipe.forEach(ingredient => {
             const indexIngredient = ingredient.toLowerCase().indexOf(valueInputSearch.toLowerCase());
             if(indexIngredient > -1){
                 valueInputIsInRecipe = true;
             }
         });
-        ustensilsRecipe.forEach(ustensil => {
-            const indexUstensil = ustensil.toLowerCase().indexOf(valueInputSearch.toLowerCase());
-            if(indexUstensil > -1){
-                valueInputIsInRecipe = true;
-            }
-        });
-        const indexAppliance = applianceRecipe.toLowerCase().indexOf(valueInputSearch.toLowerCase());
-        if(indexAppliance > -1){
-            valueInputIsInRecipe = true;
-        }
+
+        // ustensilsRecipe.forEach(ustensil => {
+        //     const indexUstensil = ustensil.toLowerCase().indexOf(valueInputSearch.toLowerCase());
+        //     if(indexUstensil > -1){
+        //         valueInputIsInRecipe = true;
+        //     }
+        // });
+        // const indexAppliance = applianceRecipe.toLowerCase().indexOf(valueInputSearch.toLowerCase());
+        // if(indexAppliance > -1){
+        //     valueInputIsInRecipe = true;
+        // }
 
         const indexDescriptionRecipe = descriptionRecipe.toLowerCase().indexOf(valueInputSearch.toLowerCase());
         if(indexDescriptionRecipe > -1){
