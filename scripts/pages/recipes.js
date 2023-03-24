@@ -233,11 +233,12 @@ function findRecipeWithInput(recipeList) {
     for (let index = 0; index < recipeList.length; index++) {
         const element = recipeList[index];
         const ingredientsRecipe = element.ingredients.map((ingredient)=>ingredient.ingredient);
-        const applianceRecipe = element.appliance;
-        const ustensilsRecipe = element.ustensils;
+        // const applianceRecipe = element.appliance;
+        // const ustensilsRecipe = element.ustensils;
 
         let valueInputIsInRecipe = false;
         const nameRecipe = element.name;
+        const descriptionRecipe = element.description
         for (let index = 0; index < ingredientsRecipe.length; index++) {
             const element = ingredientsRecipe[index];
             const indexIngredient = element.toLowerCase().indexOf(valueInputSearch.toLowerCase());
@@ -245,20 +246,25 @@ function findRecipeWithInput(recipeList) {
                 valueInputIsInRecipe = true;
             }
         }
-        for (let index = 0; index < ustensilsRecipe.length; index++) {
-            const element = ustensilsRecipe[index];
-            const indexUstensil = element.toLowerCase().indexOf(valueInputSearch.toLowerCase());
-            if(indexUstensil > -1){
-                valueInputIsInRecipe = true;
-            }
-        }
-        const indexAppliance = applianceRecipe.toLowerCase().indexOf(valueInputSearch.toLowerCase());
-        if(indexAppliance > -1){
+
+        // for (let index = 0; index < ustensilsRecipe.length; index++) {
+        //     const element = ustensilsRecipe[index];
+        //     const indexUstensil = element.toLowerCase().indexOf(valueInputSearch.toLowerCase());
+        //     if(indexUstensil > -1){
+        //         valueInputIsInRecipe = true;
+        //     }
+        // }
+        // const indexAppliance = applianceRecipe.toLowerCase().indexOf(valueInputSearch.toLowerCase());
+        // if(indexAppliance > -1){
+        //     valueInputIsInRecipe = true;
+        // }
+
+        const indexRecipeDescription = descriptionRecipe.toLowerCase().indexOf(valueInputSearch.toLowerCase());
+        if(indexRecipeDescription > -1){
             valueInputIsInRecipe = true;
         }
 
         const indexRecipeName = nameRecipe.toLowerCase().indexOf(valueInputSearch.toLowerCase());
-
         if(indexRecipeName > -1){
             valueInputIsInRecipe = true;
         }
