@@ -8,7 +8,7 @@ function dropdownFactory(type) {
         const input = document.createElement('input');
         input.setAttribute("class","input-dropdown")
         input.setAttribute("id","input-dropdown-" + type)
-        input.setAttribute("type","button")
+        input.setAttribute("type","search")
         input.setAttribute("aria-label","input-"+type)
 
         switch (type) {
@@ -46,7 +46,7 @@ function dropdownFactory(type) {
         const menu = document.createElement("div")
         menu.setAttribute('class',"dropdown-menu d-none")
         menu.setAttribute('id',"dropdown-menu-"+type)
-        menu.setAttribute('aria-labelledby',"dropdown-menu")
+        menu.setAttribute('aria-label',"dropdown-menu")
 
         const list = document.createElement("ul")
         list.setAttribute('class',"dropdown-menu-list")

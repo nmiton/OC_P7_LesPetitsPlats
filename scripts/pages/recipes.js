@@ -230,7 +230,7 @@ function findRecipeWithInput(recipeList) {
 
         let valueInputIsInRecipe = false;
         const nameRecipe = newRecipe.name;
-        const descriptionRecipe = newRecipe.name;
+        const descriptionRecipe = newRecipe.description;
 
         const indexRecipeName = nameRecipe.toLowerCase().indexOf(valueInputSearch.toLowerCase());
         if(indexRecipeName > -1){
