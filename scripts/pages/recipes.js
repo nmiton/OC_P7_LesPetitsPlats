@@ -1,3 +1,6 @@
+/**
+ * CONSTRUCTORS
+ */
 // function to display receipes
 async function displayRecipes(listRecipes) {
     const recipesSection = document.getElementById('recipes-list')
@@ -34,6 +37,9 @@ function displayDropdown(){
         filtersSection.appendChild(dropdownCardDom)
     })
 }
+/**
+ * SETTERS
+ */
 //function to get all ingredients
 function getAllIngredients(recipes){
     const ingredientsList = []
@@ -72,6 +78,9 @@ function getAllUstensils(recipes){
     });
     return ustensilsList
 }
+/**
+ * FILTERS MANAGERS
+ */
 //function to add filter to the section filters tags
 function addFilter(e){
     const filter = e.target
@@ -112,10 +121,12 @@ function deleteFilter(e){
     }
     updateRecipes()
 }
+
 // function to udpate dropdown with input dropdown value
 function updateDropdown(e){
     const dropdown = e.target.closest('.dropdown')
     const dropDownType = dropdown.getAttribute('id').split("-")[1]
+    console.log("updateDropdown")
     let listItems = []
     switch(dropDownType){
         case "ingredients":
@@ -212,7 +223,7 @@ function updateRecipes(){
 }
 //function to update list items of dropdown
 function updateList(newListItems,dropDownType){
-    console.log(dropDownType)
+    // console.log(dropDownType)
     const menuList = document.getElementById('dropdown-menu-list-'+dropDownType)
     menuList.innerHTML = ""
 
@@ -290,10 +301,6 @@ const sectionActiveFilters = document.getElementById('active-filters')
 dropdownIngredient.addEventListener("click",changeDropdown)
 dropdownUstensils.addEventListener("click",changeDropdown)
 dropdownAppliance.addEventListener("click",changeDropdown)
-//add event listener on click on button to reset dropdown
-dropdownIngredient.addEventListener("click",updateDropdown)
-dropdownUstensils.addEventListener("click",updateDropdown)
-dropdownAppliance.addEventListener("click",updateDropdown)
 //add event listener on keyup for udpate items list
 inputSearchProduct.addEventListener("keyup",updateRecipes)
 inputDropdownIngredient.addEventListener("keyup",updateDropdown)
