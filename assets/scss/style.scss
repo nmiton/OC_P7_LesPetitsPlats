@@ -110,13 +110,17 @@ body{
 
                 input{
                     color : white;
-                    padding: 23px;
+                    padding: 0 23px;
                     width: 90%;
                     height: 70px;
                     font-weight: 700;
                     text-align: left;
                     border: none;
                     border-radius: 5px;
+
+                    &::placeholder{
+                        color: white;
+                    }
         
                     &:focus{
                         outline: none;

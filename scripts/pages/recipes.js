@@ -23,7 +23,7 @@ async function displayRecipes(listRecipes) {
     }else{
         const div_none_recipe = document.createElement("div")
         div_none_recipe.setAttribute("class",'none-recipe')
-        div_none_recipe.innerText = "Aucune recette ne correspond à votre critère..."
+        div_none_recipe.innerText = 'Aucune recette ne contient "'+inputSearchProduct.value.trim()+'" vous pouvez chercher '+'"tarte au pommes"'+'"ou poisson"'
         recipesSection.appendChild(div_none_recipe);
     }
 };
